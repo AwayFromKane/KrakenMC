@@ -1,5 +1,7 @@
 const discord = require("discord.js");
 const botConfig = require("./botconfig.json");
+const token = process.env.token;
+
 
 const fs = require("fs");
 
@@ -87,4 +89,4 @@ bot.on("message", async message => {
 
 });
 
-bot.login(botConfig.token);
+bot.login(token);
