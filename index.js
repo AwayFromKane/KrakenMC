@@ -1,7 +1,5 @@
 const discord = require("discord.js");
 const botConfig = require("./botconfig.json");
-const token = process.env.token;
-
 
 const fs = require("fs");
 
@@ -89,4 +87,21 @@ bot.on("message", async message => {
 
 });
 
-bot.login(token);
+
+bot.on("guildMemberAdd", member => {
+
+    const channel = member.guild.channels.find("name", "welcome");
+    if (!channel) console.log("ERROR: Can not find that channel!");
+
+    var joinMessage = new discord.Richembed()
+    .setAuthor(`${member.user.tag}`, member.user.displayAvatarURL)
+    .setTitle(`**→ Please welcome ${member.user.username}**, **On the Official KrakenMC Discord Server! ←**`)
+    .setDescription(`⮩ Welcome ${member.user.tag}, Do you have any questions/problems? *Please contact our* **staffteam**`)
+    .setColor("#ff2020")
+    .setTimestamp()
+    .setFooter("Joined");
+
+    channel.send(joinMessage);
+});
+
+bot.login(botConfig.token);
